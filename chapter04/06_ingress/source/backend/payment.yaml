@@ -7,8 +7,24 @@
 # Service 포트: 80
 # 컨테이너 포트: 8080
 
---- 
-
+#service
+apiVersion: v1
+kind: Service
+metadata:
+  name: payment
+  namespace: snackbar
+  labels:
+    service: payment
+    project: snackbar
+spec:
+  type: NodePort
+  selector:
+    service: payment
+    project: snackbar
+  ports:
+    - port: 80
+      targetPort: 8080
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -30,11 +46,11 @@ spec:
         project: snackbar
     spec:
       containers:
-      - name: payment
-        image: yoonjeong/payment:1.0
-        ports:
-        - containerPort: 8080
-        resources:
-          limits:
-            memory: "64Mi"
-            cpu: "50m"
+        - name: payment
+          image: yoonjeong/payment:1.0
+          ports:
+            - containerPort: 8080
+          resources:
+            limits:
+              memory: "64Mi"
+              cpu: "50m"

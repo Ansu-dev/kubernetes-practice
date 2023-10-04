@@ -12,11 +12,10 @@ spec:
     service: delivery
     project: snackbar
   ports:
-  - port: 80
-    targetPort: 8080
+    - port: 80
+      targetPort: 8080
 
 ---
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -38,11 +37,11 @@ spec:
         project: snackbar
     spec:
       containers:
-      - name: delivery
-        image: yoonjeong/my-app:2.0
-        ports:
-        - containerPort: 8080
-        resources:
-          limits:
-            memory: "64Mi"
-            cpu: "50m"
+        - name: delivery
+          image: yoonjeong/my-app:2.0
+          ports:
+            - containerPort: 8080
+          resources:
+            limits:
+              memory: "64Mi"
+              cpu: "50m"
